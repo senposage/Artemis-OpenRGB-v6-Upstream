@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Artemis.Plugins.Devices.OpenRGB/Artemis.Plugins.Devices.OpenRGB.csproj" />
+  </Folder>
+  <Folder Name="/src/Artemis.Plugins.Devices.OpenRGB/">
+    <Project Path="src/Artemis.Plugins.Devices.OpenRGB/OpenRGB.NET.Tests/OpenRGB.NET.Tests.csproj" />
+    <Project Path="src/Artemis.Plugins.Devices.OpenRGB/OpenRGB.NET/OpenRGB.NET.csproj" />
+    <Project Path="src/Artemis.Plugins.Devices.OpenRGB/RGB.NET.Devices.OpenRGB/RGB.NET.Devices.OpenRGB.csproj" />
+  </Folder>
+</Solution>

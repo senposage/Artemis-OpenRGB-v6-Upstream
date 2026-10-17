@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Platforms>x64</Platforms>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <!-- Build against the published Artemis API, never the patched local Core. -->
+    <UseArtemisNugetPackages>true</UseArtemisNugetPackages>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="OpenRGB.NET\OpenRGB.NET.csproj" />
+    <ProjectReference Include="RGB.NET.Devices.OpenRGB\RGB.NET.Devices.OpenRGB.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Layouts\**" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="OpenRGB.png" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="OpenRGB.NET\**\*.cs" />
+    <Compile Remove="OpenRGB.NET.Tests\**\*.cs" />
+    <Compile Remove="RGB.NET.Devices.OpenRGB\**\*.cs" />
+    <None Remove="OpenRGB.NET\**\*" />
+    <None Remove="OpenRGB.NET.Tests\**\*" />
+    <None Remove="RGB.NET.Devices.OpenRGB\**\*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="plugin.json" CopyToOutputDirectory="PreserveNewest" />
+    <PackageReference Include="ArtemisRGB.Plugins.BuildTask" Version="2.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,95 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Artemis.Plugins.Devices.OpenRGB.Views.OpenRGBConfigurationDialogView">
+    <Grid RowDefinitions="Auto,Auto,300,Auto,Auto,Auto,*">
+        <StackPanel Grid.Row="0" Classes="plugin-introduction">
+            <TextBlock TextWrapping="Wrap">
+                Configure the OpenRGB SDK servers Artemis should connect to. Protocol v6 servers support live device hotplugging.
+            </TextBlock>
+            <TextBlock Classes="subtitle" Text="{Binding SdkStatus}" Margin="0 6 0 0" />
+        </StackPanel>
+
+        <TextBlock Grid.Row="1" Classes="card-title">Servers</TextBlock>
+        <Border Grid.Row="2" Classes="card" ClipToBounds="True">
+            <DataGrid ItemsSource="{Binding Definitions}"
+                      AutoGenerateColumns="False"
+                      CanUserSortColumns="True"
+                      HeadersVisibility="All">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="*"
+                                        Binding="{Binding ClientName}"
+                                        Header="Client Name" />
+                    <DataGridTextColumn Width="Auto"
+                                        Binding="{Binding Ip}"
+                                        Header="IP Address" />
+                    <DataGridTextColumn Width="Auto"
+                                        Binding="{Binding Port}"
+                                        Header="Port" />
+                    <DataGridTemplateColumn Width="Auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Command="{Binding $parent[UserControl].DataContext.DeleteDefinition}"
+                                        CommandParameter="{Binding}"
+                                        Classes="icon-button"
+                                        ToolTip.Tip="Delete server configuration"
+                                        HorizontalAlignment="Center">
+                                    <avalonia:MaterialIcon Kind="Delete" />
+                                </Button>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+
+        <TextBlock Grid.Row="3" Classes="card-title">Advanced</TextBlock>
+        <Border Grid.Row="4" Classes="card">
+            <Grid ColumnDefinitions="*,Auto">
+                <StackPanel Grid.Column="0">
+                    <TextBlock>
+                        Force using devices with no direct mode
+                    </TextBlock>
+                    <TextBlock Classes="subtitle" TextWrapping="Wrap">
+                        If enabled, all OpenRGB devices are added, even those without a Direct mode.
+                    </TextBlock>
+                    <TextBlock Foreground="GoldenRod">
+                        This can cause hardware damage to some devices - use with caution &amp; at your own risk!
+                    </TextBlock>
+                </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center">
+                    <ToggleSwitch IsChecked="{Binding ForceAddAllDevices}" MinWidth="0" />
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="5" Classes="card">
+            <Grid ColumnDefinitions="*,Auto">
+                <StackPanel Grid.Column="0">
+                    <TextBlock>Re-request Direct mode for devices with active layers</TextBlock>
+                    <TextBlock Classes="subtitle" TextWrapping="Wrap">
+                        If an individual OpenRGB device leaves Direct mode during a rescan, request it again only while Artemis is using that device in an active layer.
+                    </TextBlock>
+                </StackPanel>
+                <ToggleSwitch Grid.Column="1" IsChecked="{Binding RequestDirectForActiveLayers}" MinWidth="0" VerticalAlignment="Center" />
+            </Grid>
+        </Border>
+
+        <Grid Grid.Row="6" ColumnDefinitions="*,Auto" VerticalAlignment="Bottom">
+            <Button Command="{Binding AddDefinition}">
+                Add server
+            </Button>
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <Button Classes="accent" Margin="0 0 5 0" Command="{Binding SaveChanges}">
+                    Save changes
+                </Button>
+                <Button Command="{Binding Cancel}">
+                    Cancel
+                </Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

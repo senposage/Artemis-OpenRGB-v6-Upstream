@@ -1,0 +1,14 @@
+{
+  "Guid": "821cf18b-2bbe-4877-b68f-d6a2a8bddc28",
+  "MinimumVersion": "1.2025.1223.3",
+  "Name": "OpenRGB Devices v6 (Upstream Artemis)",
+  "Author": "DrMeteor,Senposage",
+  "Website": "https://artemis-rgb.com/",
+  "Repository": "https://github.com/senposage/Artemis-OpenRGB-v6-Upstream",
+  "HelpPage": "https://wiki.artemis-rgb.com/en/guides/user/devices/open-rgb",
+  "Icon": "OpenRGB.png",
+  "Description": "OpenRGB v6 for unmodified Artemis (published SDK)",
+  "Version": "2026.1017.1518",
+  "Main": "Artemis.Plugins.Devices.OpenRGB.dll",
+  "AutoEnableFeatures": false
+}
